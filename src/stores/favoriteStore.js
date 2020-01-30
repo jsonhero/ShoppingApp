@@ -9,7 +9,6 @@ class FavoriteStore {
   }
 
   addFavorite(productId) {
-    console.log(productId, ':: Called?')
     this.favoriteProducts.push(productId);
   }
 

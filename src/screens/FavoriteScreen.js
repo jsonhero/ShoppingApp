@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
-import gql from "graphql-tag";
+import { StyleSheet, Text, View } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { observer } from "mobx-react";
 
 
 import { useStores } from "../store";
+import { GET_FAVORITE_PRODUCTS } from "../queries";
 import ProductList from "../components/ProductList";
 import EmptyResults from "../components/EmptyResults";
 
@@ -16,20 +16,6 @@ const styles = StyleSheet.create({
     height: "100%",
   }
 });
-
-const GET_FAVORITE_PRODUCTS = gql`
-  query getFavoriteProducts($productIds: [ID!]) {
-    products(where: {
-      id_in: $productIds
-    }) {
-      id
-      name
-      thumbnail
-      brandName
-    }
-  }
-`;
-
 
 const FavoriteProducts = observer((props) => {
   const { favoriteStore } = useStores();

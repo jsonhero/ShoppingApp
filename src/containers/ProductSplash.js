@@ -1,26 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React  from 'react';
+import { Text, View, TouchableOpacity } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
-import gql from 'graphql-tag';
 import { observer } from "mobx-react";
 
-
 import { useStores } from "../store";
+import { GET_PRODUCTS } from "../queries";
 import EmptyResults from "../components/EmptyResults";
 import ProductList from "../components/ProductList";
-
-const GET_PRODUCTS = gql`
-  query getAllProducts($brandNames: [String!]) {
-    products(where: {
-      brandName_in: $brandNames
-    }) {
-      id
-      name
-      thumbnail
-      brandName
-    }
-  }
-`;
 
 export default observer((props) => {
 

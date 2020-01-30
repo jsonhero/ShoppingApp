@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Button, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import Products from "../containers/Products";
+import ProductSplash from "../containers/ProductSplash";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +30,7 @@ export default class HomeScreen extends React.Component {
           onPress={() => props.navigation.navigate("Other")}
           title="Goto Other"
         /> */}
-        <Products {...this.props} />
+        <ProductSplash {...this.props} />
       </View>
     );
   }

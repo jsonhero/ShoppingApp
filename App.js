@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -13,7 +13,6 @@ import ProductFilterScreen from "./src/screens/ProductFilterScreen";
 import FavoriteScreen from "./src/screens/FavoriteScreen";
 
 import { StoreProvider } from "./src/store"; 
-
 
 
 const AppNavigator = createStackNavigator(
@@ -30,7 +29,7 @@ const AppNavigator = createStackNavigator(
         unmountInactiveScreens: true,
         headerTitle: () => (
           <Text style={{ fontSize: 20, color: "white", fontFamily: "work-sans" }}>
-            Mavely
+            ShopMate
           </Text>
         ),
         headerStyle: {

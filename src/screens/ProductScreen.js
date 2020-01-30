@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { Button } from 'react-native-elements';
 import { Rating } from "react-native-elements";
+
+import { GET_SINGLE_PRODUCT } from "../queries";
 import FavoriteProduct from "../containers/FavoriteProduct";
 
 const styles = StyleSheet.create({
@@ -12,24 +13,6 @@ const styles = StyleSheet.create({
     height: "100%",
   }
 });
-
-const GET_SINGLE_PRODUCT = gql`
-  query getSingleProduct($productId: ID!) {
-    product(where: {
-      id: $productId
-    }) {
-      id
-      name
-      description
-      thumbnail
-      brandName
-      brand {
-        description
-      }
-    }
-  }
-`;
-
 
 function ProductDisplay(props) {
   const { data, loading, error } = useQuery(GET_SINGLE_PRODUCT, {
@@ -98,8 +81,6 @@ export default class ProductScreen extends React.Component {
          };
          render() {
            const { navigation } = this.props;
-           console.log(navigation.getParam('id'), ":: ID")
-           // should have dumby pic if not loaded
            return (
              <View style={styles.container}>
                <ProductDisplay productId={navigation.getParam("id")} />

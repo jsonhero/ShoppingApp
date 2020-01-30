@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Picker, FlatList, TouchableOpacity, Button } from "react-native";
-import gql from "graphql-tag";
+import React from "react";
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Button } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { observer } from "mobx-react";
 import _ from "lodash";
 
 import { useStores } from '../store';
+import { GET_PRODUCT_BRANDS } from "../queries";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,18 +15,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
-
-const GET_PRODUCT_BRANDS = gql`
-  query getProductBrands {
-    products {
-      brandName
-      brand {
-        banner
-      }
-    }
-  }
-`;
-
 
 function createBrandArray(productBrandArray) {
   const brandMap = new Map();
@@ -49,8 +37,7 @@ function createBrandArray(productBrandArray) {
 const BrandSplash = observer(({ name, imageSrc }) => {
   const { brandStore } = useStores();
 
-  console.log(brandStore, 'Store');
-  const val = brandStore.isBrandActive(name);
+  const val = brandStore.activeBrands.includes(name);
 
   return (
     <TouchableOpacity onPress={() => brandStore.toggleBrand(name)}>
@@ -109,7 +96,6 @@ function ProductBrands(props) {
   if (error) return <Text>{JSON.stringify(error)}</Text>;
   if (!data) return <Text>Not found</Text>;
 
-  // const { id, name, description, thumbnail } = data.products;
   const brandArray = createBrandArray(data.products);
 
   return (
