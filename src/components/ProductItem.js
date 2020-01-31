@@ -7,7 +7,7 @@ import ProductFavorite from "../containers/FavoriteProduct";
 const styles = StyleSheet.create({
   productItem: {
     width: 175,
-    marginBottom: 55,
+    marginBottom: 35,
   },
   productText: {
     fontFamily: 'gothic-a1',

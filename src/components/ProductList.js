@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     marginTop: 20,
-    width: 375,
+    width: 360,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
 });
 

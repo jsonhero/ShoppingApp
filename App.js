@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React from "react";
+import { Text } from "react-native";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -32,6 +32,10 @@ const AppNavigator = createStackNavigator(
             ShopMate
           </Text>
         ),
+        headerBackTitleStyle: {
+          color: "white"
+        },
+        headerTintColor: "white",
         headerStyle: {
           backgroundColor: "#026ef2",
         },
@@ -60,7 +64,7 @@ export default class App extends React.Component {
     this.setState({ fontLoaded: true })
   }
   render() {
-    // Do not render app until fonts are loaded.
+    // Will not render app until fonts are loaded.
     return this.state.fontLoaded ? (
       <StoreProvider>
         <ApolloProvider client={client}>

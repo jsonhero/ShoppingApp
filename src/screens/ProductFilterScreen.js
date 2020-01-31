@@ -37,7 +37,7 @@ function createBrandArray(productBrandArray) {
 const BrandSplash = observer(({ name, imageSrc }) => {
   const { brandStore } = useStores();
 
-  const val = brandStore.activeBrands.includes(name);
+  const brandIsActive = brandStore.activeBrands.includes(name);
 
   return (
     <TouchableOpacity onPress={() => brandStore.toggleBrand(name)}>
@@ -58,7 +58,7 @@ const BrandSplash = observer(({ name, imageSrc }) => {
             opacity: "0.2",
             zIndex: 99999,
             borderRadius: 10,
-            display: val ? "normal" : "none"
+            display: brandIsActive ? "normal" : "none"
           }}
         ></View>
         <Text
@@ -68,7 +68,7 @@ const BrandSplash = observer(({ name, imageSrc }) => {
             zIndex: 99999,
             textAlign: "center",
             lineHeight: 150,
-            color: val ? "#67A9FA" : "white",
+            color: brandIsActive ? "#67A9FA" : "white",
           }}
         >
           {name}
@@ -80,8 +80,8 @@ const BrandSplash = observer(({ name, imageSrc }) => {
             height: "100%",
             borderRadius: 10,
             position: "absolute",
-            borderWidth: val ? 2 : null,
-            borderColor: val ? "#67A9FA" : null
+            borderWidth: brandIsActive ? 2 : null,
+            borderColor: brandIsActive ? "#67A9FA" : null
           }}
         />
       </View>

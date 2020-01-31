@@ -28,7 +28,7 @@ export default observer((props) => {
   }
 
   return (
-    <View>
+    <View style={{ paddingBottom: 150 }}>
       <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', height: 45, borderBottomWidth: 1, borderBottomColor: '#d1d1d1'}}>
         <TouchableOpacity 
           onPress={() =>
