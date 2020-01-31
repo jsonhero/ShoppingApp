@@ -1,11 +1,12 @@
 import React  from 'react';
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { observer } from "mobx-react";
 
 import { useStores } from "../store";
 import { GET_PRODUCTS } from "../queries";
 import EmptyResults from "../components/EmptyResults";
+import Loader from "../components/Loader";
 import ProductList from "../components/ProductList";
 
 export default observer((props) => {
@@ -16,16 +17,11 @@ export default observer((props) => {
     variables: {
       brandNames: brandStore.activeBrands,
     },
-    fetchPolicy: "cache-first",
   });
 
-  if (loading) return <Text>Loading...</Text>;
+  if (loading) return <Loader />;
   if (error) return <Text>{JSON.stringify(error)}</Text>;
-  if (!data) return <Text>Not found</Text>;
-
-  if (data.products.length === 0) {
-    return <EmptyResults />;
-  }
+  if (!data) return <EmptyResults />;
 
   return (
     <View style={{ paddingBottom: 150 }}>
@@ -48,7 +44,10 @@ export default observer((props) => {
         </TouchableOpacity>
         <Text style={{ fontSize: 10 }}>{data.products.length} Items</Text>
       </View>
-      <ProductList products={data.products} navigation={props.navigation} />
+      {
+      (data.products.length === 0) ? 
+        <EmptyResults /> : <ProductList products={data.products} navigation={props.navigation} />
+      }
     </View>
   );
 

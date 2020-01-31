@@ -26,7 +26,6 @@ const AppNavigator = createStackNavigator(
     initialRouteName: "Home",
     defaultNavigationOptions: ({ navigation }) => {
       return {
-        unmountInactiveScreens: true,
         headerTitle: () => (
           <Text style={{ fontSize: 20, color: "white", fontFamily: "work-sans" }}>
             ShopMate

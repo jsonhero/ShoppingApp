@@ -2,10 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Button } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { observer } from "mobx-react";
+import { Ionicons } from "@expo/vector-icons";
 import _ from "lodash";
 
 import { useStores } from '../store';
 import { GET_PRODUCT_BRANDS } from "../queries";
+import Loader from "../components/Loader";
+import EmptyResults from "../components/EmptyResults";
 
 const styles = StyleSheet.create({
   container: {
@@ -55,10 +58,9 @@ const BrandSplash = observer(({ name, imageSrc }) => {
             width: "100%",
             height: "100%",
             backgroundColor: "#000000",
-            opacity: "0.2",
+            opacity: brandIsActive ? 0 : 0.2,
             zIndex: 99999,
             borderRadius: 10,
-            display: brandIsActive ? "normal" : "none"
           }}
         ></View>
         <Text
@@ -92,10 +94,11 @@ const BrandSplash = observer(({ name, imageSrc }) => {
 function ProductBrands(props) {
   const { data, loading, error } = useQuery(GET_PRODUCT_BRANDS);
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>{JSON.stringify(error)}</Text>;
-  if (!data) return <Text>Not found</Text>;
 
+  if (loading) return <Loader />;
+  if (error) return <Text>{JSON.stringify(error)}</Text>;
+  if (!data) return <EmptyResults />;
+  
   const brandArray = createBrandArray(data.products);
 
   return (
@@ -117,11 +120,9 @@ export default class ProductFilterScreen extends React.Component {
     return {
       headerBackTitle: null,
       headerLeft: () => (
-        <Button
-          title="< Back"
-          color="white"
-          onPress={() => navigation.replace("Home")}
-        />
+        <TouchableOpacity onPress={() => navigation.replace("Home")} style={{ marginLeft: 6 }}>
+          <Ionicons name={"md-arrow-back"} size={25} color={"white"} />
+        </TouchableOpacity>
       ),
     }
   };

@@ -8,11 +8,11 @@ import { useStores } from "../store";
 import { GET_FAVORITE_PRODUCTS } from "../queries";
 import ProductList from "../components/ProductList";
 import EmptyResults from "../components/EmptyResults";
-
+import Loader from "../components/Loader";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     height: "100%",
   }
 });
@@ -26,8 +26,10 @@ const FavoriteProducts = observer((props) => {
     }
   });
 
-  if (loading) return <Text>Loading...</Text>;
+
+  if (loading) return <Loader />;
   if (error) return <Text>{JSON.stringify(error)}</Text>;
+  if (!data) return <EmptyResults />;
 
   if (data.products.length === 0) {
     return <EmptyResults />

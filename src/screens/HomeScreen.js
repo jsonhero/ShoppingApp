@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerRight: () => (
-        <Button onPress={() => alert("This is a button!")} title="Info" />
-      ),
       headerLeft: () => (
         <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.navigate('Favorites')}>
           <Ionicons name={"md-heart"} size={25} color={"white"} />

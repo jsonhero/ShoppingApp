@@ -6,10 +6,12 @@ import { Rating } from "react-native-elements";
 
 import { GET_SINGLE_PRODUCT } from "../queries";
 import FavoriteProduct from "../containers/FavoriteProduct";
+import Loader from "../components/Loader";
+import EmptyResults from "../components/EmptyResults";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: '#ffffff',
     height: "100%",
   }
 });
@@ -21,9 +23,9 @@ function ProductDisplay(props) {
     }
   });
 
-  if (loading) return <Text>Loading...</Text>;
+  if (loading) return <Loader />;
   if (error) return <Text>{JSON.stringify(error)}</Text>;
-  if (!data) return <Text>Not found</Text>;
+  if (!data) return <EmptyResults />;
 
   const { id, name, description, thumbnail, brandName, brand } = data.product
 
@@ -67,7 +69,7 @@ function ProductDisplay(props) {
           </View>
         </View>        
       </ScrollView>
-      <View style={{ display: "flex", alignItems: "center", width: "100%", position: "fixed", bottom: 0, height: 60, paddingTop: 10, paddingBottom: 10, borderTopColor: "#d1d1d1", borderTopWidth: 1  }}>
+      <View style={{ display: "flex", backgroundColor: "#ffffff", alignItems: "center", width: "100%", position: "absolute", bottom: 0, height: 60, paddingTop: 10, paddingBottom: 10, borderTopColor: "#d1d1d1", borderTopWidth: 1  }}>
         <Button buttonStyle={{ backgroundColor: "#3ea84c", width: "90%" }} title="Buy Now" />
       </View>
     </React.Fragment>
